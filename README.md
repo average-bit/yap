@@ -11,6 +11,7 @@ USAGE: yap transcribe [--locale <locale>] [--censor] <input-file> [--txt] [--srt
 
 ARGUMENTS:
   <input-file>            Path to an audio or video file to transcribe.
+                          To use live microphone input, specify 'mic' as the input file.
 
 OPTIONS:
   -l, --locale <locale>   (default: current)
@@ -54,4 +55,14 @@ yap video.mp4 | uvx llm -m mlx-community/Llama-3.2-1B-Instruct-4bit 'Summarize t
 
 ```bash
 yap video.mp4 --srt -o captions.srt
+```
+
+#### Transcribe live audio from microphone
+
+```bash
+yap transcribe mic
+```
+This will start transcribing audio from your default microphone. Press `Ctrl+C` to stop the transcription. You can also specify an output file and other options:
+```bash
+yap transcribe mic --locale "en-US" -o live_transcription.txt
 ```
