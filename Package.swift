@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "yap",
-    platforms: [.macOS("26")],
+    platforms: [.macOS(.v13)], // Changed from "26" to macOS 13.0
     products: [
         .executable(name: "yap", targets: ["yap"])
     ],

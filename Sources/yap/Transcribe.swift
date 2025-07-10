@@ -117,7 +117,7 @@ import Speech
                 }
             }
         } else { // New live audio input logic
-            noora.standard(.alert("Starting live transcription. Press Ctrl+C to stop."))
+            print("Starting live transcription. Press Ctrl+C to stop.") // Changed from noora.standard
             let liveAudioRecorder = LiveAudioRecorder()
             // We need the audio format from the recorder to configure the analyzer
             // This requires a bit of a restructure or assumption. For now, let's assume a common format.
@@ -185,7 +185,7 @@ import Speech
             signal(SIGINT, SIG_IGN) // Ignore default handler to allow custom handling
 
             signalSource.setEventHandler {
-                noora.standard(.alert("\nStopping live transcription..."))
+                print("\nStopping live transcription...") // Changed from noora.standard
                 liveAudioRecorder.stopRecording()
                 inputBuilder.finish() // Finish the stream to end analysis
                 signalSource.cancel() // Clean up signal handler
