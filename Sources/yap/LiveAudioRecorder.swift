@@ -3,8 +3,6 @@ import AVFoundation
 class LiveAudioRecorder {
     private var audioEngine: AVAudioEngine?
     private var inputNode: AVAudioInputNode?
-    private var audioEngine: AVAudioEngine?
-    private var inputNode: AVAudioInputNode?
     private var audioFile: AVAudioFile?
     private(set) var outputFormat: AVAudioFormat? // Made outputFormat publicly readable but privately settable
 
@@ -16,18 +14,7 @@ class LiveAudioRecorder {
     var onAudioBuffer: ((AVAudioPCMBuffer) -> Void)?
 
     init() {
-        setupAudioSession()
-    }
-
-    private func setupAudioSession() {
-        let session = AVAudioSession.sharedInstance()
-        do {
-            try session.setCategory(.record, mode: .measurement, options: .duckOthers)
-            try session.setActive(true, options: .notifyOthersOnDeactivation)
-        } catch {
-            // It's better to propagate this error or handle it more gracefully
-            fatalError("Failed to set up audio session: \(error)")
-        }
+        // setupAudioSession() removed as AVAudioSession is not used this way on macOS
     }
 
     func startRecording(outputURL: URL? = nil) throws {
@@ -72,7 +59,7 @@ class LiveAudioRecorder {
         }
 
         do {
-            try audioEngine.prepare() // Prepare the engine before starting
+            audioEngine.prepare() // Prepare the engine before starting (does not throw)
             try audioEngine.start()
         } catch {
             print("Could not start audioEngine: \(error)")

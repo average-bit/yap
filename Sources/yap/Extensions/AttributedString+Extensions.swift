@@ -1,8 +1,14 @@
 import CoreMedia
 import Foundation
 import NaturalLanguage
+import Speech // Added for AttributeScopes
 
 extension AttributedString {
+    /// Accesses the custom TimeRangeAttribute set on the AttributedString.
+    var audioTimeRange: CMTimeRange? {
+        self.attributes[AttributeScopes.SpeechAttributes.TimeRangeAttribute.self]
+    }
+
     func sentences(maxLength: Int? = nil) -> [AttributedString] {
         let tokenizer = NLTokenizer(unit: .sentence)
         let string = String(characters)
